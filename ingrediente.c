@@ -23,12 +23,48 @@ void adicionar_ingrediente() {
 }
 
 void listar_ingredientes() {
-    printf("=== Ingredientes Dispon�veis ===\n");
+    printf("=== Ingredientes Disponíveis ===\n");
     for (int i = 0; i < qtd_ingredientes; i++) {
-        printf("ID: %d, Nome: %s, Pre�o: %.2f\n",
+        printf("ID: %d, Nome: %s, Preço: %.2f\n",
                ingredientes[i].id, ingredientes[i].nome, ingredientes[i].preco);
     }
 }
+
+void editar_ingrediente() {
+    int id;
+    printf("Informe o ID do ingrediente que deseja editar: ");
+    scanf("%d", &id);
+
+    for (int i = 0; i < qtd_ingredientes; i++) {
+        if (ingredientes[i].id == id) {
+            printf("Editando o ingrediente com ID %d\n", id);
+            printf("Novo Nome: ");
+            scanf(" %[^\n]", ingredientes[i].nome);
+            printf("Novo Preço: ");
+            scanf("%f", &ingredientes[i].preco);
+            printf("Ingrediente editado com sucesso!\n");
+            return;
+        }
+    }
+    printf("Ingrediente com ID %d não encontrado!\n", id);
+}
+
+void remover_ingrediente() {
+    int id;
+    printf("Informe o ID do ingrediente que deseja remover: ");
+    scanf("%d", &id);
+
+    for (int i = 0; i < qtd_ingredientes; i++) {
+        if (ingredientes[i].id == id) {
+            for (int j = i; j < qtd_ingredientes - 1; j++) {
+                ingredientes[j] = ingredientes[j + 1];
+            }
+            qtd_ingredientes--;
+            printf("Ingrediente com ID %d removido com sucesso!\n", id);
+            return;
+        }
+    }
+    printf("Ingrediente com ID %d não encontrado!\n", id);
 
 void exportar_ingredientes() {
     FILE *arquivo = fopen("ingredientes.txt", "w");
