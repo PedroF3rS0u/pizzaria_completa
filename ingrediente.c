@@ -65,6 +65,7 @@ void remover_ingrediente() {
         }
     }
     printf("Ingrediente com ID %d não encontrado!\n", id);
+}
 
 void exportar_ingredientes() {
     FILE *arquivo = fopen("ingredientes.txt", "w");
