@@ -33,10 +33,49 @@ void listar_pizzas() {
     }
 }
 
+void editar_pizza() {
+    int id;
+    printf("Informe o ID da pizza que deseja editar: ");
+    scanf("%d", &id);
+
+    for (int i = 0; i < qtd_pizzas; i++) {
+        if (cardapio[i].id == id) {
+            printf("Editando a pizza com ID %d\n", id);
+            printf("Novo Nome: ");
+            scanf(" %[^\n]", cardapio[i].nome);
+            printf("Novo Tamanho (P/M/G): ");
+            scanf(" %c", &cardapio[i].tamanho);
+            printf("Novo Preço Base: ");
+            scanf("%f", &cardapio[i].preco_base);
+            printf("Pizza editada com sucesso!\n");
+            return;
+        }
+    }
+    printf("Pizza com ID %d não encontrada!\n", id);
+}
+
+void remover_pizza() {
+    int id;
+    printf("Informe o ID da pizza que deseja remover: ");
+    scanf("%d", &id);
+
+    for (int i = 0; i < qtd_pizzas; i++) {
+        if (cardapio[i].id == id) {
+            for (int j = i; j < qtd_pizzas - 1; j++) {
+                cardapio[j] = cardapio[j + 1];
+            }
+            qtd_pizzas--;
+            printf("Pizza com ID %d removida com sucesso!\n", id);
+            return;
+        }
+    }
+    printf("Pizza com ID %d não encontrada!\n", id);
+}
+
 void exportar_pizzas() {
     FILE *arquivo = fopen("pizzas.txt", "w");
     if (!arquivo) {
-        printf("Erro ao abrir arquivo para exporta��o!\n");
+        printf("Erro ao abrir arquivo para exportação!\n");
         return;
     }
     for (int i = 0; i < qtd_pizzas; i++) {
